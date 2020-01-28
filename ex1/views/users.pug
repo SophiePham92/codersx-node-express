@@ -1,12 +1,23 @@
-h1 User List
+extends ./layout/common.pug
+block content
+    h1 
+        span.mr-5 User List
+        a.btn.btn-primary(href='/users/create') Create new user
 
-a(href='/users/create') Create new user
+    
+    form(action='/users/search', method='GET')
+        .d-flex.justify-content-end
+            input.mr-2(type='text',name='q')
+            button.btn.btn-primary Search
 
-form(action='/users/search', method='GET')
-    input(type='text',name='q')
-    button Search
-ul
-    for user in users
-        li= user.name 
-            span &nbsp
-            a(href='/users/' + user.id) View
+    table.table
+        tr
+            th Name
+            th Phone
+            th Action
+        for user in users
+            tr
+                td= user.name 
+                td= user.phone
+                td
+                    a(href='/users/' + user.id) View
